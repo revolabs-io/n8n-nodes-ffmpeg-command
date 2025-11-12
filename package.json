@@ -44,6 +44,7 @@
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
+		"@types/ffprobe-static": "^2.0.3",
 		"eslint": "9.32.0",
 		"prettier": "3.6.2",
 		"release-it": "^19.0.4",
@@ -53,6 +54,7 @@
 		"n8n-workflow": "*"
 	},
 	"dependencies": {
-		"ffmpeg-static": "^5.2.0"
+		"ffmpeg-static": "^5.2.0",
+		"ffprobe-static": "^3.1.0"
 	}
 }
