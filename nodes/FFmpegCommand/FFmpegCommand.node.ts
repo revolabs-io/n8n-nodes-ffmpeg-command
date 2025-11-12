@@ -6,16 +6,30 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-export class FFmpegCommand implements INodeType {
+import ffmpegPath from 'ffmpeg-static'; // eslint-disable-line
+import { exec } from 'child_process'; // eslint-disable-line
+
+const execCommand = (command: string): Promise<{ stdout: string; stderr: string }> => {
+	return new Promise((resolve, reject) => {
+		exec(command, (error, stdout, stderr) => {
+			if (error && stderr) {
+				reject(stderr);
+			}
+			resolve({ stdout, stderr });
+		});
+	});
+};
+
+export class FfmpegCommand implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'FFmpegCommand',
+		displayName: 'FfmpegCommand',
 		name: 'ffmpegCommand',
 		icon: { light: 'file:ffmpeg-command.svg', dark: 'file:ffmpeg-command.dark.svg' },
 		group: ['input'],
 		version: 1,
-		description: 'A comprehensive n8n community node for executing FFmpeg and FFprobe commands',
+		description: 'FFmpeg command',
 		defaults: {
-			name: 'FFmpegCommand',
+			name: 'FfmpegCommand',
 		},
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
@@ -24,12 +38,13 @@ export class FFmpegCommand implements INodeType {
 			// Node properties which the user gets displayed and
 			// can change on the node.
 			{
-				displayName: 'My String',
-				name: 'myString',
+				displayName: 'Command',
+				name: 'command',
 				type: 'string',
 				default: '',
-				placeholder: 'Placeholder value',
-				description: 'The description text',
+				placeholder: 'ffmpeg -i input.mp4 output.mp4',
+				description: 'FFmpeg command',
+				required: true,
 			},
 		],
 	};
@@ -42,17 +57,28 @@ export class FFmpegCommand implements INodeType {
 		const items = this.getInputData();
 
 		let item: INodeExecutionData;
-		let myString: string;
+		let command: string;
 
 		// Iterates over all input items and add the key "myString" with the
 		// value the parameter "myString" resolves to.
 		// (This could be a different value for each item in case it contains an expression)
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			try {
-				myString = this.getNodeParameter('myString', itemIndex, '') as string;
+				command = this.getNodeParameter('command', itemIndex, '') as string;
 				item = items[itemIndex];
 
-				item.json.myString = myString;
+				if (command.startsWith('ffmpeg') && ffmpegPath) {
+					const results = await execCommand(command.replace(/^ffmpeg/, ffmpegPath));
+
+					item.json = {
+						...results,
+						command,
+					};
+				} else {
+					throw new NodeOperationError(this.getNode(), 'Command is not a valid ffmpeg command', {
+						itemIndex,
+					});
+				}
 			} catch (error) {
 				// This node should never fail but we want to showcase how
 				// to handle errors.

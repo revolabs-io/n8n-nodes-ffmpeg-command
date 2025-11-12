@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-ffmpeg-command",
 	"version": "0.1.0",
-	"description": "A comprehensive n8n community node for executing FFmpeg and FFprobe commands",
+	"description": "A N8N node for executing FFmpeg and FFprobe commands - no need for binary installations or custom Docker images.",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
@@ -39,7 +39,7 @@
 		"strict": true,
 		"credentials": [],
 		"nodes": [
-			"dist/nodes/FFmpegCommand/FFmpegCommand.node.js"
+			"dist/nodes/FfmpegCommand/FfmpegCommand.node.js"
 		]
 	},
 	"devDependencies": {
@@ -51,5 +51,8 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"ffmpeg-static": "^5.2.0"
 	}
 }
