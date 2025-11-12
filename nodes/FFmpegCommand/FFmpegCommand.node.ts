@@ -22,14 +22,14 @@ const execCommand = (command: string): Promise<{ stdout: string; stderr: string 
 
 export class FfmpegCommand implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'FfmpegCommand',
+		displayName: 'FFmpeg command',
 		name: 'ffmpegCommand',
 		icon: { light: 'file:ffmpeg-command.svg', dark: 'file:ffmpeg-command.dark.svg' },
 		group: ['input'],
 		version: 1,
 		description: 'FFmpeg command',
 		defaults: {
-			name: 'FfmpegCommand',
+			name: 'Execute FFmpeg command',
 		},
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
@@ -42,7 +42,7 @@ export class FfmpegCommand implements INodeType {
 				name: 'command',
 				type: 'string',
 				default: '',
-				placeholder: 'ffmpeg -i input.mp4 output.mp4',
+				placeholder: 'ffmpeg -i /folder/input.mp4 /folder/output.mp4',
 				description: 'FFmpeg command',
 				required: true,
 			},
