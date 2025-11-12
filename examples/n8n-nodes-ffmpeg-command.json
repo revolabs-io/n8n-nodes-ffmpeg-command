@@ -1,0 +1,101 @@
+{
+  "name": "n8n-nodes-ffmpeg-command",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        -80
+      ],
+      "id": "6ac1c50c-3a93-41d7-9a38-36ba67c10d23",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.stdout)"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        16
+      ],
+      "id": "1434c075-5b8b-4a89-afc2-215774e83e8f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "command": "ffprobe -v quiet -print_format json -show_format -show_streams /Users/revolabs/Downloads/output.mp4"
+      },
+      "type": "CUSTOM.ffprobeCommand",
+      "typeVersion": 1,
+      "position": [
+        48,
+        16
+      ],
+      "id": "66306be4-86bc-4d3d-b8f5-aa1e85d5acef",
+      "name": "Execute FFprobe Command"
+    },
+    {
+      "parameters": {
+        "command": "ffmpeg -i /folder/input.mp4 /folder/output.mp4"
+      },
+      "type": "CUSTOM.ffmpegCommand",
+      "typeVersion": 1,
+      "position": [
+        48,
+        -176
+      ],
+      "id": "74c9feb9-1f3b-4c7f-9e7c-1c4854599602",
+      "name": "Execute FFmpeg command"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute FFprobe Command",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute FFmpeg command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    },
+    "Execute FFprobe Command": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6ed095a2-20a3-41e1-8f46-e7bb50499134",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5da6d2e0b6b655ccbfc80c98a3ef8ab7888b48cd1138f3fc1d01b41c2ddda3fa"
+  },
+  "id": "MGcpX6xkP6F9Y32H",
+  "tags": []
+}
