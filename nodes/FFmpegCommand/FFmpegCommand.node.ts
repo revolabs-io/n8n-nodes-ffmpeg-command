@@ -6,16 +6,16 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-export class Example implements INodeType {
+export class FFmpegCommand implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Example',
-		name: 'example',
-		icon: { light: 'file:example.svg', dark: 'file:example.dark.svg' },
+		displayName: 'FFmpegCommand',
+		name: 'ffmpegCommand',
+		icon: { light: 'file:ffmpeg-command.svg', dark: 'file:ffmpeg-command.dark.svg' },
 		group: ['input'],
 		version: 1,
-		description: 'Basic Example Node',
+		description: 'A comprehensive n8n community node for executing FFmpeg and FFprobe commands',
 		defaults: {
-			name: 'Example',
+			name: 'FFmpegCommand',
 		},
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
