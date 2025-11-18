@@ -1,6 +1,6 @@
 # 🎬 n8n-nodes-ffmpeg-command
 
-[![n8n node](https://img.shields.io/badge/Node-n8n-blue.svg)](https://n8n.io/)
+[![n8n node](https://img.shields.io/badge/Node-n8n-blue.svg)](https://n8n.io/) [![NPM Downloads](https://img.shields.io/npm/dm/n8n-nodes-ffmpeg-command)](https://www.npmjs.com/package/n8n-nodes-ffmpeg-command)
 
 A N8N node for executing FFmpeg and FFprobe commands - no need for binary installations or custom Docker images.
 
