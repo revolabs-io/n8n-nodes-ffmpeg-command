@@ -6,19 +6,7 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-import { path as ffprobePath } from 'ffprobe-static'; // eslint-disable-line
-import { exec } from 'child_process'; // eslint-disable-line
-
-const execCommand = (command: string): Promise<{ stdout: string; stderr: string }> => {
-	return new Promise((resolve, reject) => {
-		exec(command, (error, stdout, stderr) => {
-			if (error && stderr) {
-				reject(stderr);
-			}
-			resolve({ stdout, stderr });
-		});
-	});
-};
+import { execCommand, getFfmpegFfprobe } from '../../utils';
 
 export class FfprobeCommand implements INodeType {
 	description: INodeTypeDescription = {
@@ -59,6 +47,8 @@ export class FfprobeCommand implements INodeType {
 
 		let item: INodeExecutionData;
 		let command: string;
+
+		const { ffprobePath } = await getFfmpegFfprobe();
 
 		// Iterates over all input items and add the key "myString" with the
 		// value the parameter "myString" resolves to.
