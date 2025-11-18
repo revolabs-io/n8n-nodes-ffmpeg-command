@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-ffmpeg-command",
-	"version": "1.2.0-0",
+	"version": "1.2.0",
 	"description": "A N8N node for executing FFmpeg and FFprobe commands - no need for binary installations or custom Docker images.",
 	"license": "MIT",
 	"homepage": "",
