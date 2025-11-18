@@ -39,7 +39,8 @@
 		"strict": true,
 		"credentials": [],
 		"nodes": [
-			"dist/nodes/FfmpegCommand/FfmpegCommand.node.js"
+			"dist/nodes/FfmpegCommand/FfmpegCommand.node.js",
+			"dist/nodes/FfprobeCommand/FfprobeCommand.node.js"
 		]
 	},
 	"devDependencies": {
